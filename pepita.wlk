@@ -6,12 +6,27 @@ object pepita {
 	}
 	
 	method volar(distancia) {
-		energia = energia - 10 - distancia
+		self.validarVolar(distancia)
+		energia = energia - self.energiaParaVolarDistancia(distancia)
 	}
-		
+	method validarVolar(distancia) {
+		if ( not self.puedeVolar(distancia)) {
+			self.error ("Pepita no tiene suficiente energia para volar")
+		}
+	}
+
+	method energiaParaVolarDistancia(distancia) {
+		return 10 + distancia
+	}
+
 	method energia() {
 		return energia
 	}
+	method puedeVolar(distancia) {
+		return	energia >= self.energiaParaVolarDistancia(distancia)
+	  
+	}
+
 }
 
 object alpiste {
@@ -54,8 +69,24 @@ object pepon {
 	}
 		
 	method volar(distancia) {
-		energia = energia - 20 - 2*distancia
+		self.validarVolar(distancia)
+		energia = energia - self.energiaParaVolarDistancia(distancia)
 	}
+
+	method validarVolar(distancia) {
+		if ( not self.puedeVolar(distancia)){
+			self.error ("No tengo suficiente energia")				//se termina el programa
+			}
+
+	}
+	method energiaParaVolarDistancia(distancia) {
+		return 20 + 2*distancia
+	}
+	method puedeVolar(distancia) {
+		return	energia >= self.energiaParaVolarDistancia(distancia)
+	  
+	}
+
 	
 }
 
@@ -73,4 +104,11 @@ object roque {
 		cenas = cenas + 1
 	}
 }
+
+	// expresividad deben tener el  nombre de los metodos y expresion es un objeto
+	//receta:
+	//method <nombreMensaje>() {
+	//	self.validar...()
+	//	<logicaDeNegocio> 
+	//}
 
