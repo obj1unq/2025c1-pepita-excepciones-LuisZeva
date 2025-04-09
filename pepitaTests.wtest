@@ -12,4 +12,30 @@ describe "Pepita, Pepon y Roque"{
         assert.fail("IMPLEMENTAR EL TEST!")
     }
 
+} 
+
+describe "Pepita" {
+  test "Cuando vuela 10 con energia 100 su energia queda en 80" {
+    pepita.volar(10)
+    assert.equals(80, pepita.energia())
+  }
+
+  test "Cuando come alpiste, su energia de 100 pasa a 120"{
+    pepita.comer(alpiste)
+    assert.equals(120, pepita.energia())
+  }
+
+  test "El alpiste aporta 20 de energia"{
+    assert.equals(20, alpiste.energiaQueAporta())  // cada test reinicia el repl, los test son independientes entre sí
+  }
+  test "Con energia 100 no puede volar 100" {
+    assert.notThat(pepon.puedeVolar(100))
+  }
+  test "Con energia 100 falla al querer volar 91" {
+    //Testeo si la orden falla
+    assert.throwsException({ pepita.volar(91)})  
+    //Testeo que no se modifico el estado                  //en un test no se pueden poner mensajes que fallen
+    assert.equals(100, pepita.energia())                  //no es lo mismo que falle a que reviente el test por excepcion
+  }
+
 }
